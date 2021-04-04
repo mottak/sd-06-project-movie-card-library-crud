@@ -1,23 +1,39 @@
-import React, { Component } from 'react';
-
+import React, { useEffect, useContext} from 'react';
+import Context from '../Context/Context'
 import MovieForm from '../components/MovieForm';
+
 import * as movieAPI from '../services/movieAPI';
 
-class NewMovie extends Component {
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
+function NewMovie() {
+  const { moviesList, setMovieList, editedMovie, setEditedMovie } = useContext(Context);
+
+ 
+  const indexId = moviesList.length;
+
+  // useEffect(() => {
+  //   const createNewMovie = async () => {
+  //     const movie = await movieAPI.createMovie();
+  //     console.log(indexId)
+
+  //   };
+  //   createNewMovie();
+  // }, []);
+
+  const handleFormSubmit = async (id) => {
+    setEditedMovie({...editedMovie, id})
+    setMovieList([...moviesList, editedMovie]);
+    setEditedMovie({})
+    await movieAPI.createMovie(editedMovie);
   }
 
-  handleSubmit(newMovie) {
-  }
-
-  render() {
     return (
+
       <div data-testid="new-movie">
-        <MovieForm onSubmit={this.handleSubmit} />
+       
+          <MovieForm id={indexId} handleFormSubmit={handleFormSubmit} />
+        
       </div>
     );
-  }
+
 }
 export default NewMovie;

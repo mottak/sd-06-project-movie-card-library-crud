@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Context from '../Context/Context';
 import * as movieAPI from '../services/movieAPI';
@@ -7,19 +7,26 @@ import { Loading } from '../components';
 function MovieDetails({match}) {
     const { id } = match.params;
     const { movieDetails, setMovieDetails } = useContext(Context);
+    const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
       const getMovieDetail = async () => {
         const details = await movieAPI.getMovie(id);
         setMovieDetails(details);
-        console.log(details);
-
+        setIsLoading(false);
       }
-      getMovieDetail()
+      getMovieDetail();
     }, []);
+
     return (
       <div data-testid="movie-details">
         detalhes
-        <img alt="Movie Cover" src={`../${movieDetails.imagePath}`} />
+      {isLoading 
+        ? <Loading /> 
+        : <div>  
+        <img alt="Movie Cover" src={ movieDetails.imagePath.match(/^https/i) 
+          ? movieDetails.imagePath 
+          : `../${movieDetails.imagePath}`} />
         <p>{`Subtitle: ${movieDetails.subtitle}`}</p>
         <p>{`Storyline: ${movieDetails.storyline}`}</p>
         <p>{`Genre: ${movieDetails.genre}`}</p>
@@ -30,6 +37,8 @@ function MovieDetails({match}) {
           </button>
         </Link>
       </div>
+    }
+    </div>
     );
   
 }

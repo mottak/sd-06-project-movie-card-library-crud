@@ -1,12 +1,21 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Context from '../Context/Context'
 import PropTypes from 'prop-types';
+import * as movieAPI from '../services/movieAPI';
 
-function MovieForm ({id}) {
+function MovieForm ({id, movieInfo, handleFormSubmit}) {
   const genreArray = ['Ação', 'Comédia', 'Suspense', 'Fantasia'];
-  const {editedMovie, setEditedMovie, handleFormSubmit} = useContext(Context);
+  const {editedMovie, setEditedMovie, setMovieList, moviesList} = useContext(Context);
   const [isDisable, setIsDisable] = useState(false);
+
+  useEffect(() => {
+    console.log('edited', editedMovie)
+    if(movieInfo){
+      setEditedMovie({...movieInfo})
+    }
+  }, [])
+
  
     return (
       <div>
@@ -17,6 +26,7 @@ function MovieForm ({id}) {
           id="movie_title"
           type="text"
           className="validate"
+          value={editedMovie.title}
           onChange={({target}) => setEditedMovie({...editedMovie, title: target.value })}
         />
         </label>
@@ -27,6 +37,7 @@ function MovieForm ({id}) {
           id="movie_subtitle"
           type="text"
           className="validate"
+          value={editedMovie.subtitle}
           onChange={({target}) => setEditedMovie({...editedMovie, subtitle: target.value })}
         />
         </label>
@@ -37,6 +48,7 @@ function MovieForm ({id}) {
           placeholder="Insira o caminho da imagem"
           id="movie_image"
           type="text"
+          value={editedMovie.imagePath}
           onChange={({target}) => setEditedMovie({...editedMovie, imagePath: target.value })}
         />
         </label>
@@ -47,16 +59,18 @@ function MovieForm ({id}) {
           id="movie_storyline"
           type="text"
           className="validate"
+          value={editedMovie.storyline}
           onChange={({target}) => setEditedMovie({...editedMovie, storyline: target.value })}
         />
         </label>
         <label htmlFor="movie_genre">Gênero</label>
         <select
           id="movie_genre"
+          value={editedMovie.genre}
           onChange={({target}) => setEditedMovie({...editedMovie, genre: target.value })}
         >
           {genreArray.map(e =>(
-            <option key={e}>{e}</option>
+            <option key={e} value={e}>{e}</option>
           ))}
           </select>
           <label htmlFor="movie_rating">Avaliação
@@ -67,14 +81,15 @@ function MovieForm ({id}) {
           step={0.1}
           min={0}
           max={5}
+          value={editedMovie.rating}
           onChange={({target}) => setEditedMovie({...editedMovie, rating: target.value })}
         />
        </label>
        <div>
          <Link to="/">
         <button
-         type="button"
-          onClick={handleFormSubmit(id)}
+          type="button"
+          onClick={(event) => handleFormSubmit(id, event)}
           disabled={isDisable}
         >
           Submit

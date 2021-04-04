@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Context from '../Context/Context';
 import Loading from '../components/Loading';
 import MovieCard from '../components/MovieCard';
@@ -23,12 +24,14 @@ function MovieList () {
         {isLoading ? <Loading /> :
         moviesList.map((movie) => (
         <MovieCard
-          key={movie.title}
+          key={movie.id}
           title={movie.title}
           id={movie.id}
           storyline={movie.storyline}
           image={movie.imagePath}
         />))}
+        <Link to="/movies/new">Adicionar Cartão</Link>
+        
       </div>
     );
   
