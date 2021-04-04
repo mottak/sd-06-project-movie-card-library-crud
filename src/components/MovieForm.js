@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Context from '../Context/Context'
 import PropTypes from 'prop-types';
-import * as movieAPI from '../services/movieAPI';
 
 function MovieForm ({id, movieInfo, handleFormSubmit}) {
   const genreArray = ['Ação', 'Comédia', 'Suspense', 'Fantasia'];

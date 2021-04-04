@@ -1,8 +1,8 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Context from '../Context/Context';
-import Loading from '../components/Loading';
-import MovieCard from '../components/MovieCard';
+import {Loading, MovieCard, Header} from '../components';
+
 import * as movieAPI from '../services/movieAPI';
 
 function MovieList () {
@@ -21,6 +21,7 @@ function MovieList () {
   
   return (
       <div data-testid="movie-list">
+        <Header />
         {isLoading ? <Loading /> :
         moviesList.map((movie) => (
         <MovieCard

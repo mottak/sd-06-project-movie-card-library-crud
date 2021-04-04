@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Context from '../Context/Context';
-import { MovieForm } from '../components';
-import Loading from '../components/Loading';
+import { MovieForm, Loading } from '../components';
 import * as movieAPI from '../services/movieAPI';
 
 function EditMovie({match}){

@@ -1,6 +1,6 @@
-import React, {useContext} from 'react';
-import Context from '../Context/Context';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import Context from '../Context/Context';
 
 function MovieCard ({title, image, storyline, id}) {
   const {deleteMovie} = useContext(Context);
