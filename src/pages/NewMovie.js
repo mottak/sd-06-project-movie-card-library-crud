@@ -7,17 +7,7 @@ import * as movieAPI from '../services/movieAPI';
 function NewMovie() {
   const { moviesList, setMovieList, editedMovie, setEditedMovie } = useContext(Context);
 
- 
   const indexId = moviesList.length;
-
-  // useEffect(() => {
-  //   const createNewMovie = async () => {
-  //     const movie = await movieAPI.createMovie();
-  //     console.log(indexId)
-
-  //   };
-  //   createNewMovie();
-  // }, []);
 
   const handleFormSubmit = async (id) => {
     setEditedMovie({...editedMovie, id})
@@ -29,9 +19,7 @@ function NewMovie() {
     return (
 
       <div data-testid="new-movie">
-       
-          <MovieForm id={indexId} handleFormSubmit={handleFormSubmit} />
-        
+        <MovieForm id={indexId} handleFormSubmit={handleFormSubmit} />
       </div>
     );
 

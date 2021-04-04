@@ -6,7 +6,7 @@ import { Loading } from '../components';
 
 function MovieDetails({match}) {
     const { id } = match.params;
-    const { movieDetails, setMovieDetails } = useContext(Context);
+    const { movieDetails, setMovieDetails, deleteMovie } = useContext(Context);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -36,6 +36,7 @@ function MovieDetails({match}) {
             Editar Filme
           </button>
         </Link>
+        <button type="button" onClick={()=>{deleteMovie(id)}}>Deletar cartão</button>
       </div>
     }
     </div>
