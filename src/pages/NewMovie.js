@@ -1,6 +1,6 @@
 import React, { useContext} from 'react';
 import Context from '../Context/Context'
-import { MovieForm } from '../components';
+import { MovieForm, Header } from '../components';
 import * as movieAPI from '../services/movieAPI';
 
 function NewMovie() {
@@ -18,6 +18,7 @@ function NewMovie() {
     return (
 
       <div data-testid="new-movie">
+        <Header title="Crie um novo Cartão de Filme" />
         <MovieForm id={indexId} handleFormSubmit={handleFormSubmit} />
       </div>
     );

@@ -1,9 +1,26 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Context from '../Context/Context'
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+import { makeStyles, Button } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) =>({
+  movieCard:{
+    margin: '3px #000000',
+  },
+  buttonDesign: {
+    background: theme.status.alert,
+    color: theme.status.dark,
+    fontFamily: ['Arial', 'sans-serif'],
+    fontSize: 14
+  },
+  linkClass: {
+    textDecoration: 'none'
+  }
+}))
 
 function MovieForm ({id, movieInfo, handleFormSubmit}) {
+  const classes = useStyles();
   const genreArray = ['Ação', 'Comédia', 'Suspense', 'Fantasia'];
   const {editedMovie, setEditedMovie, setMovieList, moviesList} = useContext(Context);
   const [isDisable, setIsDisable] = useState(false);
@@ -85,15 +102,19 @@ function MovieForm ({id, movieInfo, handleFormSubmit}) {
         />
        </label>
        <div>
-         <Link to="/">
-        <button
+         <Link to="/" className={classes.linkClass}>
+        <Button
           type="button"
           onClick={(event) => handleFormSubmit(id, event)}
           disabled={isDisable}
+          className={classes.buttonDesign}
         >
           Submit
-        </button>
-        </Link>
+        </Button>
+        </Link >
+        <Link to="/" className={classes.linkClass}>
+              <Button className={classes.buttonDesign} type="button" >Voltar para página inicial</Button>
+            </Link>
       </div>
       </div>
     );

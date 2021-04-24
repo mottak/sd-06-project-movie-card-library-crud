@@ -1,21 +1,46 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
+import { Link, useLocation } from 'react-router-dom';
+import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   header:{
-    background: '#000000',
-    height: '10vh',
+    background: theme.status.dark,
+    height: '100%',
     width: '100%',
-    color: '#FFFFFF',
-  }
-})
+    color: theme.status.light,
+  },
+  fontTitle: {
+    fontFamily: ['Arial', 'sans-serif'],
+    fontSize: 28,
+  },
+  buttonDesign: {
+    background: theme.status.alert,
+    color: theme.status.dark,
+    fontFamily: ['Arial', 'sans-serif'],
+    fontSize: 14
+  },
+  linkClass: {
+    textDecoration: 'none',
+    color: theme.status.alert
+  },
+ 
+}))
 
-function Header() {
+function Header({title}) {
   const classes = useStyles();
+  let location = useLocation();
   return(
-    <div className={classes.header}>
-      <h2>Movie Library CRUD</h2>
-    </div>
+    <Grid className={classes.header}>
+      <h2 className={classes.fontTitle}>{title}</h2>
+      {location !== '/' 
+      ? 
+      <Link to="/" className={classes.linkClass}>
+        Voltar para página inicial
+      </Link>
+      : null
+      }
+    </Grid>
   );
 
 }

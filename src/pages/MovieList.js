@@ -6,15 +6,18 @@ import { Button, makeStyles } from '@material-ui/core';
 
 import * as movieAPI from '../services/movieAPI';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme)=>({
   buttonDesign: {
-    background: '#fbc02d',
-    color: '#000000',
+    background: theme.status.alert,
+    color: theme.status.dark,
+    fontFamily: ['Arial', 'sans-serif'],
+    fontSize: 14
   },
   linkClass: {
     textDecoration: 'none'
-  }
-})
+  },
+ 
+}))
 
 function MovieList () {
   const classes = useStyles();
@@ -23,32 +26,37 @@ function MovieList () {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const getMovieList = async ()=> {
+    const getMovieList = async () => {
       const movies = await movieAPI.getMovies();
       setMovieList(movies);
       setIsLoading(false);
     };
     getMovieList();
   }, []);
-  
+    
   return (
 
-      <div data-testid="movie-list" className={classes.movieList}>
-        <Header />
-        {isLoading ? <Loading /> :
-        moviesList.map((movie) => (
+      <div data-testid="movie-list">
+        <Header title="Movie Library CRUD" />
+        {isLoading || !moviesList || moviesList.length === 0 
+          ? <Loading /> 
+          : <div>
+          {moviesList.map((movie) => (
         <MovieCard
           key={movie.id}
           title={movie.title}
           id={movie.id}
           storyline={movie.storyline}
           image={movie.imagePath}
-        />))}
+        />
+        ))}
         <Link to="/movies/new" className={classes.linkClass}>
-          <Button className={classes.buttonDesign}>
-          Adicionar Cartão
-          </Button>
-        </Link>
+        <Button className={classes.buttonDesign}>
+        Adicionar Cartão
+        </Button>
+      </Link>
+      </div>
+          }
       </div>
     );
   

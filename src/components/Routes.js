@@ -1,9 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { MovieList, NewMovie, EditMovie, MovieDetails, NotFound } from '../pages'
+import {
+  MovieList, NewMovie, EditMovie, MovieDetails, NotFound,
+} from '../pages';
 
-function Routes (){
-  return(
+function Routes() {
+  return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={MovieList} />
@@ -12,7 +14,7 @@ function Routes (){
         <Route path="/movies/:id" component={MovieDetails} />
         <Route component={NotFound} />
       </Switch>
-  </BrowserRouter>
+    </BrowserRouter>
   );
 }
 

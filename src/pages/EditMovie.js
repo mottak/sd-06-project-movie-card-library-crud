@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Context from '../Context/Context';
-import { MovieForm, Loading } from '../components';
+import { MovieForm, Loading, Header } from '../components';
 import * as movieAPI from '../services/movieAPI';
 
 function EditMovie({match}){
@@ -34,6 +34,7 @@ function EditMovie({match}){
 
     return (
       <div data-testid="edit-movie">
+        <Header title="Edite o Cartão do Filme" />
         {isLoading ? <Loading /> :
           <MovieForm id={id} movieInfo={movieInfo} handleFormSubmit={handleFormSubmit} />}
       </div>
