@@ -36,7 +36,7 @@ function HomeIcon(props) {
   );
 }
 
-function Header({title}) {
+function Header({title="Movie Library CRUD"}) {
   const classes = useStyles();
   let history = useHistory();
   return(

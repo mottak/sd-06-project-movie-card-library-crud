@@ -37,7 +37,7 @@ function MovieList () {
   return (
 
       <div data-testid="movie-list">
-        <Header title="Movie Library CRUD" />
+        <Header />
         {isLoading || !moviesList || moviesList.length === 0 
           ? <Loading /> 
           : <div>

@@ -1,19 +1,27 @@
 import React from 'react';
 import minion from '../image/minion.png'
+import Header from '../components/Header'
+import { Typography, Box } from '@material-ui/core';
 import Section from '../assets/themeComponets/Section';
 import SectionItem from '../assets/themeComponets/SectionItem';
 
 function NotFound (){
 
     return (
-      <Section data-testid="404-error">
-  
+      <Section
+        direction="row"
+        justify="space-around"
+        alignItems="center"
+      >
+        <Header />
         <SectionItem sm={6}>
-          <img src={minion} alt="Página não encontrada" style={ { height: "500px"}} />
+          <img src={minion} alt="Página não encontrada" style={ { height: "480px"}} />
         </SectionItem>
-        <SectionItem sm={6}>
-          <h3>Página não encontrada</h3>
-        </SectionItem>
+        <Typography>
+          <SectionItem sm={6} alignItems="center">
+            <Box fontFamily="Roboto" fontSize="70px">Página não encontrada</Box>
+          </SectionItem>
+        </Typography>
       </Section>
     );
 
