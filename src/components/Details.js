@@ -27,23 +27,28 @@ function Details({ id, isLoading }) {
       {isLoading
         ? (<Loading />)
         : (
-          <Section>
+          <Section height={1000}>
             <SectionItem sm={6}>
               <MovieDescription />
+              <SectionItem 
+              direction="row"
+              justify="center"
+              alignItems="center"
+              >
+                <Link to={`/movies/${id}/edit`} className={classes.linkClass}>
+                  <Button type="button" className={classes.buttonDesign}>
+                    Editar Filme
+                  </Button>
+                </Link>
+                <Link to="/" className={classes.linkClass}>
+                  <Button className={classes.buttonDesign} type="button" onClick={()=>{deleteMovie(id)}}>Deletar cartão</Button>
+                </Link>
+              </SectionItem>
             </SectionItem>
-            <SectionItem sm={6}>
+            <SectionItem sm={6} height={750}>
               <ImageDetails />
             </SectionItem>
-
-            <Link to={`/movies/${id}/edit`} className={classes.linkClass}>
-              <Button type="button" className={classes.buttonDesign}>
-                Editar Filme
-              </Button>
-            </Link>
-            <Link to="/" className={classes.linkClass}>
-              <Button className={classes.buttonDesign} type="button" onClick={()=>{deleteMovie(id)}}>Deletar cartão</Button>
-            </Link>
-           
+          
           </Section>
         )}
 

@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Context from '../Context/Context'
 // import PropTypes from 'prop-types';
-import { makeStyles, Button } from '@material-ui/core';
+import { makeStyles, Button, TextField, MenuItem } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) =>({
   movieCard:{
@@ -31,76 +31,80 @@ function MovieForm ({id, movieInfo, handleFormSubmit}) {
       setEditedMovie({...movieInfo})
     }
   }, [])
-
+{/* <TextField required id="standard-required" label="Required" defaultValue="Hello World" /> */}
  
     return (
       <div>
-        <label htmlFor="movie_title">
-        Título
-        <input
+        
+        <form>
+        <TextField
           placeholder="Insira o título"
           id="movie_title"
+          label="Título"
           type="text"
           className="validate"
           value={editedMovie.title}
           onChange={({target}) => setEditedMovie({...editedMovie, title: target.value })}
+          variant="outlined"
         />
-        </label>
-        <label htmlFor="movie_subtitle">
-        Subtítulo
-        <input
+        
+        <TextField
           placeholder="Insira o subtítulo"
           id="movie_subtitle"
+          label="Subtítulo"
           type="text"
           className="validate"
           value={editedMovie.subtitle}
           onChange={({target}) => setEditedMovie({...editedMovie, subtitle: target.value })}
-        />
-        </label>
-     
-        <label htmlFor="movie_image">
-          Imagem
-         <input
+          variant="outlined"
+        /> 
+
+         <TextField
           placeholder="Insira o caminho da imagem"
           id="movie_image"
+          label="Imagem"
           type="text"
           value={editedMovie.imagePath}
           onChange={({target}) => setEditedMovie({...editedMovie, imagePath: target.value })}
+          variant="outlined"
         />
-        </label>
-        <label htmlFor="movie_storyline">
-        Sinopse
-        <textarea
-     
+
+        <TextField
           id="movie_storyline"
+          label="Sinopse"
           type="text"
           className="validate"
           value={editedMovie.storyline}
           onChange={({target}) => setEditedMovie({...editedMovie, storyline: target.value })}
+          variant="outlined"
         />
-        </label>
-        <label htmlFor="movie_genre">Gênero</label>
-        <select
+
+        <TextField
           id="movie_genre"
+          select
+          label="Gênero"
           value={editedMovie.genre}
           onChange={({target}) => setEditedMovie({...editedMovie, genre: target.value })}
+          variant="outlined"
         >
           {genreArray.map(e =>(
-            <option key={e} value={e}>{e}</option>
+            <MenuItem key={e} value={e}>{e}</MenuItem>
           ))}
-          </select>
-          <label htmlFor="movie_rating">Avaliação
-          <input
+          </TextField>
+
+          <TextField
           placeholder="Dê a avaliação do filme"
           id="movie_rating"
+          label="Avaliação"
           type="number"
           step={0.1}
           min={0}
           max={5}
           value={editedMovie.rating}
           onChange={({target}) => setEditedMovie({...editedMovie, rating: target.value })}
+          variant="outlined"
         />
-       </label>
+
        <div>
          <Link to="/" className={classes.linkClass}>
         <Button
@@ -116,6 +120,7 @@ function MovieForm ({id, movieInfo, handleFormSubmit}) {
               <Button className={classes.buttonDesign} type="button" >Voltar para página inicial</Button>
             </Link>
       </div>
+      </form>
       </div>
     );
 

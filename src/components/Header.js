@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Grid } from '@material-ui/core';
+import { Link, useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+import Section from '../assets/themeComponets/Section';
+import SectionItem from '../assets/themeComponets/SectionItem';
+import { SvgIcon } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   header:{
@@ -12,35 +14,51 @@ const useStyles = makeStyles((theme) => ({
   },
   fontTitle: {
     fontFamily: ['Arial', 'sans-serif'],
-    fontSize: 28,
-  },
-  buttonDesign: {
-    background: theme.status.alert,
-    color: theme.status.dark,
-    fontFamily: ['Arial', 'sans-serif'],
-    fontSize: 14
+    fontSize: 38,
   },
   linkClass: {
     textDecoration: 'none',
-    color: theme.status.alert
+    color: theme.status.alert,
+    fontFamily: ['Arial', 'sans-serif'],
+    fontSize: 14,
   },
+  homeDesign: {
+    color: theme.status.light,
+    fontSize: 30
+  }
  
 }))
+function HomeIcon(props) {
+  return (
+    <SvgIcon {...props}>
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+    </SvgIcon>
+  );
+}
 
 function Header({title}) {
   const classes = useStyles();
-  let location = useLocation();
+  let history = useHistory();
   return(
-    <Grid className={classes.header}>
-      <h2 className={classes.fontTitle}>{title}</h2>
-      {location !== '/' 
+    <Section
+      className={classes.header}
+      direction="row"
+      justify="space-around"
+      alignItems="center"
+    >
+      {history.location.pathname !== '/' 
       ? 
-      <Link to="/" className={classes.linkClass}>
-        Voltar para página inicial
-      </Link>
+      <SectionItem sm={3} >
+        <Link to="/" className={classes.linkClass}>
+        <HomeIcon className={classes.homeDesign} />
+        </Link>
+      </SectionItem>
       : null
       }
-    </Grid>
+      <SectionItem sm={9}>
+        <h2 className={classes.fontTitle}>{title}</h2>
+      </SectionItem>
+    </Section>
   );
 
 }

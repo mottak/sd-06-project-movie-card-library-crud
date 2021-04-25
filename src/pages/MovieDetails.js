@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 
-import { useRouteMatch } from 'react-router-dom';
+// import { useRouteMatch } from 'react-router-dom';
 import Context from '../Context/Context';
 import * as movieAPI from '../services/movieAPI';
 import { Loading, Header, Details } from '../components';
