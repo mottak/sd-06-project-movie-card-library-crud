@@ -22,16 +22,15 @@ function MovieDetails({match}) {
     getMovieDetail();
   }, []);
   return (
-    <Section data-testid="movie-details">
+    <Section data-testid="movie-details"
+    direction="row"
+    justify="center"
+    alignItems="center">
       <Header title="Detalhes" />
       {isLoading ? (
         <Loading />
       ) : (
-        <SectionItem  
-          direction="row"
-          justify="center"
-          alignItems="center"
-        >
+        <SectionItem>
           <Details id={routeId} isLoading={isLoading} />
         </SectionItem>
       )}

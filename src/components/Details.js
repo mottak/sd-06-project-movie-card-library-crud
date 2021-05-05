@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme) =>({
   },
   linkClass: {
     textDecoration: 'none'
+  },
+  sectionItemDesign: {
+    padding: '30px 30px'
   }
 }))
 
@@ -27,13 +30,13 @@ function Details({ id, isLoading }) {
       {isLoading
         ? (<Loading />)
         : (
-          <Section height={1000}>
-            <SectionItem sm={6}>
+          <Section>
+            <SectionItem sm={6} className={classes.sectionItemDesign} >
               <MovieDescription />
               <SectionItem 
-              direction="row"
-              justify="center"
-              alignItems="center"
+                direction="row"
+                justify="space-around"
+                alignItems="center"
               >
                 <Link to={`/movies/${id}/edit`} className={classes.linkClass}>
                   <Button type="button" className={classes.buttonDesign}>
@@ -45,7 +48,7 @@ function Details({ id, isLoading }) {
                 </Link>
               </SectionItem>
             </SectionItem>
-            <SectionItem sm={6} height={750}>
+            <SectionItem sm={6} className={classes.sectionItemDesign}>
               <ImageDetails />
             </SectionItem>
           

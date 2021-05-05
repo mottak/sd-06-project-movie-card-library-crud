@@ -2,9 +2,16 @@ import React, { useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Context from '../Context/Context';
 import { Loading, MovieCard, Header } from '../components';
-import { Button, makeStyles } from '@material-ui/core';
-
+import { Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles'
+import Section from '../assets/themeComponets/Section';
+import SectionItem from '../assets/themeComponets/SectionItem';
 import * as movieAPI from '../services/movieAPI';
+
+
+// colocar estilo nos botões de prev e next
+// colocar padding entre os cartões de filmes
+// centralizar botão de criar card
 
 const useStyles = makeStyles((theme)=>({
   buttonDesign: {
@@ -16,7 +23,11 @@ const useStyles = makeStyles((theme)=>({
   linkClass: {
     textDecoration: 'none'
   },
- 
+  movieListDesign: {
+    margin: 'auto',
+    justifyContent: 'center',
+  },
+
 }))
 
 function MovieList () {
@@ -32,32 +43,38 @@ function MovieList () {
       setIsLoading(false);
     };
     getMovieList();
+    // eslint-disable-next-line
   }, []);
     
   return (
 
-      <div data-testid="movie-list">
+      <Section
+        direction="column"
+        justify="center"
+        alignItems="center"
+      >
         <Header />
         {isLoading || !moviesList || moviesList.length === 0 
           ? <Loading /> 
-          : <div>
-          {moviesList.map((movie) => (
-        <MovieCard
-          key={movie.id}
-          title={movie.title}
-          id={movie.id}
-          storyline={movie.storyline}
-          image={movie.imagePath}
-        />
-        ))}
-        <Link to="/movies/new" className={classes.linkClass}>
-        <Button className={classes.buttonDesign}>
-        Adicionar Cartão
-        </Button>
-      </Link>
-      </div>
-          }
-      </div>
+          : <Section className={classes.movieListDesign}>
+              {moviesList.map((movie) => (
+                <MovieCard
+                  key={movie.id}
+                  title={movie.title}
+                  id={movie.id}
+                  image={movie.imagePath}
+                />
+            ))}
+            </Section>       
+        }
+        <SectionItem style={{ alignSelf: 'center' }}>
+          <Link to="/movies/new" className={classes.linkClass}>
+            <Button className={classes.buttonDesign}>
+              Adicionar Cartão
+            </Button>
+          </Link>
+        </SectionItem>
+      </Section>
     );
   
 }

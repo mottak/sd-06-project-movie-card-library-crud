@@ -21,10 +21,12 @@ const useStyles = makeStyles((theme) => ({
     color: theme.status.alert,
     fontFamily: ['Arial', 'sans-serif'],
     fontSize: 14,
+    padding: '0 0 0 20px'
   },
   homeDesign: {
     color: theme.status.light,
-    fontSize: 30
+    fontSize: 30,
+    
   }
  
 }))

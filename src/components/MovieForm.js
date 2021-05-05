@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) =>({
     textDecoration: 'none'
   },
   SectionItemDesign: {
-    alignItems: 'baseline',
+    padding: '6px 0 6px'
   }
 }))
 
@@ -42,6 +42,7 @@ function MovieForm ({id, movieInfo, handleFormSubmit}) {
         direction="column"
         justify="space-between"
         alignItems="center"
+        style={{padding: "30px 0"}}
       >
         
         <form>
