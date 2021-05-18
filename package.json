@@ -3,12 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/system": "^4.11.3",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/user-event": "^7.2.1",
     "mutationobserver-shim": "^0.3.5",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.1",
+    "styled-components": "^5.2.3",
+    "tiny-slider": "^2.9.3",
+    "tiny-slider-react": "^0.5.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -33,6 +41,10 @@
   },
   "devDependencies": {
     "@testing-library/react": "^10.0.4",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-react": "^7.23.2",
     "react-router-dom": "^5.2.0"
   }
 }

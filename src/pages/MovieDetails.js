@@ -1,25 +1,41 @@
-import React, { Component } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 
+// import { useRouteMatch } from 'react-router-dom';
+import Context from '../Context/Context';
 import * as movieAPI from '../services/movieAPI';
-import { Loading } from '../components';
+import { Loading, Header, Details } from '../components';
+import Section from '../assets/themeComponets/Section';
+import SectionItem from '../assets/themeComponets/SectionItem';
 
-class MovieDetails extends Component {
-  render() {
-    // Change the condition to check the state
-    // if (true) return <Loading />;
+function MovieDetails({match}) {
+  const {id: routeId} = match.params
+  // const { id } = useRouteMatch();
+  const { setMovieDetails, movieDetails } = useContext(Context);
+  const [isLoading, setIsLoading] = useState(true);
 
-    const { title, storyline, imagePath, genre, rating, subtitle } = {};
-
-    return (
-      <div data-testid="movie-details">
-        <img alt="Movie Cover" src={`../${imagePath}`} />
-        <p>{`Subtitle: ${subtitle}`}</p>
-        <p>{`Storyline: ${storyline}`}</p>
-        <p>{`Genre: ${genre}`}</p>
-        <p>{`Rating: ${rating}`}</p>
-      </div>
-    );
-  }
+  useEffect(() => {
+    const getMovieDetail = async () => {
+      const details = await movieAPI.getMovie(routeId);
+      setMovieDetails(details);
+      setIsLoading(false);
+    };
+    getMovieDetail();
+  }, []);
+  return (
+    <Section data-testid="movie-details"
+    direction="row"
+    justify="center"
+    alignItems="center">
+      <Header title="Detalhes" />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <SectionItem>
+          <Details id={routeId} isLoading={isLoading} />
+        </SectionItem>
+      )}
+    </Section>
+  );
 }
 
 export default MovieDetails;

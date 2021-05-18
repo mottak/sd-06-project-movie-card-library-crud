@@ -1,34 +1,45 @@
-import React, { Component } from 'react';
-
-import { MovieForm } from '../components';
+import React, { useEffect, useState, useContext } from 'react';
+import Context from '../Context/Context';
+import { MovieForm, Loading, Header } from '../components';
 import * as movieAPI from '../services/movieAPI';
 
-class EditMovie extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+function EditMovie({match}){
+  const { id } = match.params;
+  const { moviesList, setMovieList, editedMovie, setEditedMovie } = useContext(Context);
+  const [isLoading, setIsLoading] = useState(true);
+  const [movieInfo, setMovieInfo] = useState({});
 
-  handleSubmit(updatedMovie) {
-  }
+  useEffect(() => {
+    const getMovieToEdit = async () => {
+      const movie = await movieAPI.getMovie(Number(id));
+      console.log(movie)
+      setMovieInfo(movie);
+      setIsLoading(false);
+    };
+    getMovieToEdit();
+  }, []);
 
-  render() {
-    const { status, shouldRedirect, movie } = this.state;
-    if (shouldRedirect) {
-      // Redirect
-    }
-
-    if (status === 'loading') {
-      // render Loading
+    const handleFormSubmit = async(id, event) => {
+      const newMovieList = moviesList.map(movie => {
+        if(movie.id, 10 === Number(id)){
+          console.log(movie.id, id)
+          return {...movie, editedMovie};
+        }
+      });
+      setMovieList(newMovieList);
+     await movieAPI.updateMovie(editedMovie)
+     setEditedMovie({})
+     event.preventDefault();
     }
 
     return (
       <div data-testid="edit-movie">
-        <MovieForm movie={movie} onSubmit={this.handleSubmit} />
+        <Header title="Edite o Cartão do Filme" />
+        {isLoading ? <Loading /> :
+          <MovieForm id={id} movieInfo={movieInfo} handleFormSubmit={handleFormSubmit} />}
       </div>
     );
-  }
+
 }
 
 export default EditMovie;

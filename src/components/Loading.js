@@ -1,11 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { CircularProgress, makeStyles } from '@material-ui/core';
 
-class Loading extends Component {
-  render() {
+const useStyles = makeStyles((theme)=>({
+  bottom: {
+    color: theme.status.alert,
+  }}),
+)
+
+function Loading() {
+  const classes = useStyles();
     return (
-      <div>Loading message</div>
+      <CircularProgress  className={classes.bottom}/>
     );
-  }
 }
 
 export default Loading;

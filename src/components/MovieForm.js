@@ -1,157 +1,149 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import Context from '../Context/Context'
+// import PropTypes from 'prop-types';
+import Section from '../assets/themeComponets/Section';
+import SectionItem from '../assets/themeComponets/SectionItem';
+import { makeStyles, Button, TextField, MenuItem } from '@material-ui/core';
 
-class MovieForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { ...props.movie };
-    this.handleSubmit = this.handleSubmit.bind(this);
+const useStyles = makeStyles((theme) =>({
+  movieCard:{
+    margin: '3px #000000',
+  },
+  buttonDesign: {
+    background: theme.status.alert,
+    color: theme.status.dark,
+    fontFamily: ['Arial', 'sans-serif'],
+    fontSize: 14 
+  },
+  linkClass: {
+    textDecoration: 'none'
+  },
+  SectionItemDesign: {
+    padding: '6px 0 6px'
   }
+}))
 
-  handleSubmit() {
-    const { onSubmit } = this.props;
-    onSubmit(this.state);
-  }
+function MovieForm ({id, movieInfo, handleFormSubmit}) {
+  const classes = useStyles();
+  const genreArray = ['Ação', 'Comédia', 'Suspense', 'Fantasia'];
+  const {editedMovie, setEditedMovie, setMovieList, moviesList} = useContext(Context);
+  const [isDisable, setIsDisable] = useState(false);
 
-  updateMovie(field, newValue) {
-    this.setState({ [field]: newValue });
-  }
-
-  renderTitleInput() {
-    const { title } = this.state;
-
+  useEffect(() => {
+    console.log('edited', editedMovie)
+    if(movieInfo){
+      setEditedMovie({...movieInfo})
+    }
+  }, [])
+ 
     return (
-      <div>
-        <input
-          placeholder="Insira o título"
-          id="movie_title"
-          type="text"
-          className="validate"
-          value={title}
-          onChange={(event) => this.updateMovie('title', event.target.value)}
-        />
-        <label htmlFor="movie_title">Título</label>
-      </div>
-    );
-  }
-
-  renderSubtitleInput() {
-    const { subtitle } = this.state;
-
-    return (
-      <div>
-        <input
-          placeholder="Insira o subtítulo"
-          id="movie_subtitle"
-          type="text"
-          value={subtitle}
-          onChange={(event) => this.updateMovie('subtitle', event.target.value)}
-        />
-        <label htmlFor="movie_subtitle">Subtítulo</label>
-      </div>
-    );
-  }
-
-  renderImagePathInput() {
-    const { imagePath } = this.state;
-
-    return (
-      <div className="row">
-        <input
-          placeholder="Insira o caminho da imagem"
-          id="movie_image"
-          type="text"
-          value={imagePath}
-          onChange={(event) => this.updateMovie('imagePath', event.target.value)}
-        />
-        <label htmlFor="movie_image">Imagem</label>
-      </div>
-    );
-  }
-
-  renderStorylineInput() {
-    const { storyline } = this.state;
-
-    return (
-      <div>
-        <textarea
-          id="movie_storyline"
-          value={storyline}
-          onChange={(event) => this.updateMovie('storyline', event.target.value)}
-        />
-        <label htmlFor="movie_storyline">Sinopse</label>
-      </div>
-    );
-  }
-
-  renderGenreSelection() {
-    const { genre } = this.state;
-
-    return (
-      <div>
-        <label htmlFor="movie_genre">Gênero</label>
-        <select
-          id="movie_genre"
-          value={genre}
-          onChange={(event) => this.updateMovie('genre', event.target.value)}
-        >
-          <option value="action">Ação</option>
-          <option value="comedy">Comédia</option>
-          <option value="thriller">Suspense</option>
-          <option value="fantasy">Fantasia</option>
-        </select>
-      </div>
-    );
-  }
-
-  renderRatingInput() {
-    const { rating } = this.state;
-
-    return (
-      <div>
-        <input
-          placeholder="Dê a avaliação do filme"
-          id="movie_rating"
-          type="number"
-          step={0.1}
-          min={0}
-          max={5}
-          value={rating}
-          onChange={(event) => this.updateMovie('rating', event.target.value)}
-        />
-        <label htmlFor="movie_rating">Avaliação</label>
-      </div>
-    );
-  }
-
-  renderSubmitButton() {
-    return (
-      <div>
-        <button
-          type="button"
-          onClick={this.handleSubmit}
-        >
-          Submit
-        </button>
-      </div>
-    );
-  }
-
-  render() {
-    return (
-      <div>
+      <Section
+        direction="column"
+        justify="space-between"
+        alignItems="center"
+        style={{padding: "30px 0"}}
+      >
+        
         <form>
-          {this.renderTitleInput()}
-          {this.renderSubtitleInput()}
-          {this.renderImagePathInput()}
-          {this.renderStorylineInput()}
-          {this.renderGenreSelection()}
-          {this.renderRatingInput()}
-          {this.renderSubmitButton()}
-        </form>
-      </div>
+          <SectionItem className={classes.SectionItemDesign}>
+            <TextField
+              placeholder="Insira o título"
+              id="movie_title"
+              label="Título"
+              type="text"
+              className="validate"
+              value={editedMovie.title}
+              onChange={({target}) => setEditedMovie({...editedMovie, title: target.value })}
+              variant="outlined"
+            />
+          </SectionItem>
+        
+          <SectionItem className={classes.SectionItemDesign}>
+            <TextField
+              placeholder="Insira o subtítulo"
+              id="movie_subtitle"
+              label="Subtítulo"
+              type="text"
+              className="validate"
+              value={editedMovie.subtitle}
+              onChange={({target}) => setEditedMovie({...editedMovie, subtitle: target.value })}
+              variant="outlined"
+            /> 
+          </SectionItem>
+       
+          <SectionItem className={classes.SectionItemDesign}>
+            <TextField
+              placeholder="Insira o caminho da imagem"
+              id="movie_image"
+              label="Imagem"
+              type="text"
+              value={editedMovie.imagePath}
+              onChange={({target}) => setEditedMovie({...editedMovie, imagePath: target.value })}
+              variant="outlined"
+            />
+          </SectionItem>
+
+          <SectionItem className={classes.SectionItemDesign}>
+            <TextField
+              id="movie_storyline"
+              label="Sinopse"
+              type="text"
+              className="validate"
+              value={editedMovie.storyline}
+              onChange={({target}) => setEditedMovie({...editedMovie, storyline: target.value })}
+              variant="outlined"
+            />
+          </SectionItem>
+
+          <SectionItem className={classes.SectionItemDesign}>
+            <TextField
+              id="movie_genre"
+              select
+              label="Gênero"
+              value={editedMovie.genre}
+              onChange={({target}) => setEditedMovie({...editedMovie, genre: target.value })}
+              variant="outlined"
+              style={ { width: '100%' } }
+            >
+              {genreArray.map(e =>(
+                <MenuItem key={e} value={e}>{e}</MenuItem>
+              ))}
+            </TextField>
+          </SectionItem>
+
+          <SectionItem className={classes.SectionItemDesign}>
+            <TextField
+              placeholder="Dê a avaliação do filme"
+              id="movie_rating"
+              label="Avaliação"
+              type="number"
+              step={0.1}
+              min={0}
+              max={5}
+              value={editedMovie.rating}
+              onChange={({target}) => setEditedMovie({...editedMovie, rating: target.value })}
+              variant="outlined"
+            />
+          </SectionItem>
+        
+          <SectionItem className={classes.SectionItemDesign}>
+            <Link to="/" className={classes.linkClass}>
+              <Button
+                type="button"
+                onClick={(event) => handleFormSubmit(id, event)}
+                disabled={isDisable}
+                className={classes.buttonDesign}
+              >
+                Submit
+              </Button>
+            </Link >
+          </SectionItem>
+ 
+      </form>
+      </Section>
     );
-  }
+
 }
 
 export default MovieForm;

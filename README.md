@@ -1,3 +1,25 @@
+### Primeiro CRUD - MOVIE CARD LIBRARY CRUD
+
+O MOVIE LIBRARY CRUD foi o primeiro CRUD desenvolvido por mim. A primeira vez que desenvolvi foi em X
+como projeto avaliativo da Trybe (link da trybe), na época foi desenvolvido em React, foram usadas
+funções de forma simular chamadas a API's, usando um banco de dados interno.
+
+Esse projeto foi refatorado em react hooks, com a finalidade de ser o primeiro projeto do meu portifólio
+O principal objetivo ao refazer esse projeto foi o aprendizado de um novo framework de estilização, o 
+Material ui. (link para doc)
+Continuei utilizando os as funções que simulam as chamadas de API para que o projeto continue 
+funcinando independente da disponibilidade de qualquer API.
+
+O Material ui é um framework que eu já conhecia, mas nunca havia utilizado em nenhum projeto antes. 
+FALAR DAS VANTAGENS DO MATERIAL UI
+
+
+PRINCIPAIS APRENDIZADOS
+
+
+PRINCIPAIS DIFICULDADES
+
+
 # Boas vindas ao repositório do projeto de Movie Cards CRUD!
 
 Você já usa o GitHub diariamente para desenvolver os exercícios, certo? Agora, para desenvolver os projetos, você deverá seguir as instruções a seguir. Fique atento a cada passo, e se tiver qualquer dúvida, nos envie por _Slack_! #vqv 🚀
